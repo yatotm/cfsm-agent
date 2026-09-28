@@ -1,6 +1,6 @@
 ﻿$ErrorActionPreference = "Stop"
 
-$Repo = "huilang-me/cfsm-agent"
+$Repo = "yatotm/cfsm-agent"
 $GitHubProxy = ""
 $InstallVersion = "latest"
 $AutoUpdateEnabled = $false

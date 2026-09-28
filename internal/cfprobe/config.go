@@ -58,10 +58,10 @@ func normalizePingMode(raw string) (string, error) {
 	switch raw {
 	case "", pingModeTCP:
 		return pingModeTCP, nil
-	case pingModeICMP:
-		return pingModeICMP, nil
+	case pingModeICMP, pingModeHTTP:
+		return raw, nil
 	default:
-		return "", fmt.Errorf("ping_mode 仅支持 tcp 或 icmp")
+		return "", fmt.Errorf("ping_mode 仅支持 tcp、icmp 或 http")
 	}
 }
 

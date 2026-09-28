@@ -7,7 +7,7 @@ const (
 	legacyAgentVersion          = "1.0.0"
 	maxTrafficCorrectionGB      = 1000000
 	autoUpdateDelay             = 60 * time.Second
-	configSchemaVersion         = "7"
+	configSchemaVersion         = "8"
 	defaultReportIntervalSec    = 60
 	defaultWSSReportIntervalSec = 2
 	minWSSReportIntervalSec     = 1
@@ -16,6 +16,7 @@ const (
 	connectionModeHTTP          = "http"
 	pingModeTCP                 = "tcp"
 	pingModeICMP                = "icmp"
+	pingModeHTTP                = "http"
 )
 
 type Config struct {

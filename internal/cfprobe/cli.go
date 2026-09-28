@@ -176,7 +176,7 @@ func printUsage(w io.Writer) {
 	fmt.Fprintln(w, "  -interface=IFACES    指定网卡，多个用英文逗号分隔")
 	fmt.Fprintln(w, "  -reset_day=N         流量重置日(1-31, 0=不重置)，默认1")
 	fmt.Fprintln(w, "  -connection_mode=MODE 连接模式 auto|http，默认auto")
-	fmt.Fprintln(w, "  -ping_mode=MODE      Ping 模式 tcp|icmp，默认tcp")
+	fmt.Fprintln(w, "  -ping_mode=MODE      Ping 模式 tcp|icmp|http，默认tcp；http 支持完整 HTTP/HTTPS 网址")
 	fmt.Fprintln(w, "  -auto_update=0|1     开启自动检查更新，默认0")
 	fmt.Fprintln(w, "  -rx_correction=N     下行流量校正(GB)")
 	fmt.Fprintln(w, "  -tx_correction=N     上行流量校正(GB)")

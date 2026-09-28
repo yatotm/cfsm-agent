@@ -889,7 +889,8 @@ func (a *Agent) applyRemoteConfigWithOptions(body []byte, headers http.Header, a
 	if len(body) == 0 {
 		return errors.New("empty body")
 	}
-	if len(body) > 1024 {
+	// 八个完整网址经百分号编码后可能超过旧协议的 1 KiB 限制。
+	if len(body) > 16*1024 {
 		return errors.New("response too large")
 	}
 	raw := strings.TrimSpace(string(body))
@@ -975,7 +976,7 @@ func (a *Agent) applyRemoteConfigWithOptions(body []byte, headers http.Header, a
 	if reset < 0 || reset > 31 {
 		return fmt.Errorf("invalid reset_day %d", reset)
 	}
-	if values.Get("schema_version") != configSchemaVersion {
+	if values.Get("schema_version") != configSchemaVersion && values.Get("schema_version") != "7" {
 		return fmt.Errorf("invalid schema_version %s", values.Get("schema_version"))
 	}
 	if report < collect {

@@ -233,7 +233,7 @@ func measureProbe(kind, target string, count, defaultPort int, log logger) Probe
 	if strings.TrimSpace(target) == "" {
 		return ProbeResult{RTTMs: -1, Loss: 100, OK: false}
 	}
-	if kind != pingModeICMP {
+	if kind != pingModeICMP && kind != pingModeHTTP {
 		kind = pingModeTCP
 	}
 	if count < 1 {
@@ -247,9 +247,12 @@ func measureProbe(kind, target string, count, defaultPort int, log logger) Probe
 	for i := 0; i < count; i++ {
 		var ms int
 		var err error
-		if kind == pingModeICMP {
+		switch kind {
+		case pingModeICMP:
 			ms, err = icmpPing(target, defaultPingTimeout)
-		} else {
+		case pingModeHTTP:
+			ms, err = httpPing(target, defaultPingTimeout)
+		default:
 			ms, err = tcpPing(target, defaultPort, defaultPingTimeout)
 		}
 		if err == nil {
@@ -263,7 +266,7 @@ func measureProbe(kind, target string, count, defaultPort int, log logger) Probe
 }
 
 func probeHistoryKey(kind, target string) string {
-	if kind != pingModeICMP {
+	if kind != pingModeICMP && kind != pingModeHTTP {
 		kind = pingModeTCP
 	}
 	target = strings.TrimSpace(target)
